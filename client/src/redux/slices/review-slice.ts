@@ -28,11 +28,9 @@ export const reviewSlice = createSlice({
   initialState,
   reducers: {
     addLast3Reviews: (state, action: PayloadAction<ReviewPayload>) => {
-      // state.reviews = state.reviews.concat(action.payload.top3Reviews);
       state.reviews = [...action.payload.top3Reviews, ...state.reviews];
     },
     setReviews: (state, action: PayloadAction<IReview[]>) => {
-      // state.reviews = state.reviews.concat(action.payload.top3Reviews);
       state.reviews = action.payload;
     },
     addTop3Review: (state, action: PayloadAction<ReviewPayload>) => {

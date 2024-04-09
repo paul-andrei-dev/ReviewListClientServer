@@ -15,7 +15,6 @@ import {
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store.ts';
-// import { reviews } from '../mock-data/data.ts';
 import { reviewApi } from '../redux/apis/reviews/review.api.ts';
 import { EMPTY_STATE } from '../constants.ts';
 import { HISTORY_CARD_BG_COLOR } from '../redux/const.ts';
@@ -59,21 +58,11 @@ export const LandingPage = () => {
     sessionStorage.setItem('reviews', JSON.stringify(allReviews));
   }, [allReviews]);
 
-  // useEffect(() => {
-  //   const storedReviews = sessionStorage.getItem('reviews');
-  //
-  //   const oldReviews = JSON.parse(storedReviews || JSON.stringify([]));
-  //
-  //   setTimeout(() => {
-  //     dispatch(setReviews(oldReviews));
-  //   }, 1000);
-  // }, [dispatch]);
-
   return (
     <Box
       sx={{
         display: 'flex',
-        flexDirection: isMediumScreen ? 'column-reverse' : 'row', // Adjust layout based on screen width
+        flexDirection: isMediumScreen ? 'column-reverse' : 'row',
         justifyContent: 'space-between',
         alignItems: 'start',
         width: '100%',
