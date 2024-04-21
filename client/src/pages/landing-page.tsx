@@ -1,23 +1,16 @@
-import {
-  Box,
-  Typography,
-  Paper,
-  Stack,
-  Rating,
-  Button,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Button, Stack, useMediaQuery } from '@mui/material';
 import {
   addLast3Reviews,
   addTop3Review,
-  setReviews,
 } from '../redux/slices/review-slice.ts';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store.ts';
 import { reviewApi } from '../redux/apis/reviews/review.api.ts';
-import {EMPTY_STATE, HISTORY_CARD_BG_COLOR} from '../constants.ts';
+import { HISTORY_CARD_BG_COLOR } from '../constants.ts';
 import { useTheme } from '@mui/material/styles';
+import { ReviewCard } from '../components/review-card.tsx';
+import { ColumnTitle } from '../components/column-title.tsx';
 
 export const LandingPage = () => {
   const theme = useTheme();
@@ -36,8 +29,6 @@ export const LandingPage = () => {
     getTop3Reviews(Date.now())
       .unwrap()
       .then((response) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         const reviews = response.top3Reviews;
         dispatch(addLast3Reviews({ top3Reviews: reviews }));
         dispatch(addTop3Review({ top3Reviews: reviews }));
@@ -72,75 +63,37 @@ export const LandingPage = () => {
       </Button>
 
       <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
-        <Typography variant="h4" gutterBottom textAlign="center">
-          Top 3 Reviews
-        </Typography>
+        <ColumnTitle title="Top 3 Reviews" />
         <Stack spacing={2}>
           {top3Reviews.map((review, index) => (
-            <Paper key={index} elevation={3} sx={{ p: 2 }}>
-              <Typography variant="h6" component="div" gutterBottom>
-                {review?.name || EMPTY_STATE}
-              </Typography>
-              <Typography variant="body1" color="text.secondary" gutterBottom>
-                {review?.body || EMPTY_STATE}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                Date:{' '}
-                {review?.date
-                  ? new Date(review?.date).toLocaleString()
-                  : EMPTY_STATE}
-              </Typography>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                Timezone: {review?.timezone || EMPTY_STATE}
-              </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Rating name="read-only" value={review?.rating} readOnly />
-                <Typography ml={1}>
-                  ({review?.rating || EMPTY_STATE})
-                </Typography>
-              </Box>
-            </Paper>
+            <ReviewCard
+              key={index}
+              name={review.name}
+              rating={review.rating}
+              date={review.date}
+              timezone={review.timezone}
+              description={review.body}
+            />
           ))}
         </Stack>
       </Box>
 
       {!isSmallScreen && (
         <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4 }}>
-          <Typography variant="h4" gutterBottom textAlign="center">
-            History
-          </Typography>
+          <ColumnTitle title="History" />
           <Stack spacing={2}>
             {allReviews.map((review, index) => (
-              <Paper
+              <ReviewCard
                 key={index}
-                elevation={3}
-                sx={{
-                  p: 2,
+                name={review.name}
+                rating={review.rating}
+                date={review.date}
+                timezone={review.timezone}
+                description={review.body}
+                sxStyles={{
                   backgroundColor: HISTORY_CARD_BG_COLOR[review.rating],
                 }}
-              >
-                <Typography variant="h6" component="div" gutterBottom>
-                  {review?.name || EMPTY_STATE}
-                </Typography>
-                <Typography variant="body1" color="text.secondary" gutterBottom>
-                  {review?.body || EMPTY_STATE}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                  Date:{' '}
-                  {review?.date
-                    ? new Date(review?.date).toLocaleString()
-                    : EMPTY_STATE}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                  Timezone: {review?.timezone || EMPTY_STATE}
-                </Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                  <Rating name="read-only" value={review?.rating} readOnly />
-                  <Typography ml={1}>
-                    ({review?.rating || EMPTY_STATE})
-                  </Typography>
-                </Box>
-              </Paper>
+              />
             ))}
           </Stack>
         </Box>
