@@ -16,8 +16,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux/store.ts';
 import { reviewApi } from '../redux/apis/reviews/review.api.ts';
-import { EMPTY_STATE } from '../constants.ts';
-import { HISTORY_CARD_BG_COLOR } from '../redux/const.ts';
+import {EMPTY_STATE, HISTORY_CARD_BG_COLOR} from '../constants.ts';
 import { useTheme } from '@mui/material/styles';
 
 export const LandingPage = () => {

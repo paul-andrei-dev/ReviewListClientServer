@@ -31,7 +31,7 @@ To get a local copy up and running, follow these simple steps.
 ```zsh
 cd server
 pnpm install
-pnpm start
+pnpm run start:dev
 ```
 ```zsh
 cd client
