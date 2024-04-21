@@ -26,9 +26,7 @@ To get a local copy up and running, follow these simple steps.
 ### Installation
 
 1. Clone the repo
-```zsh
-git clone https://github.com/<your-username>/TopReviews.git
-```
+
 2. Install NPM packages and start the app
 ```zsh
 cd server
@@ -43,20 +41,9 @@ npm run dev
 
 ## Usage
 
-- Access the web app at [http://localhost:8080](http://localhost:8080).
 - Use the "Refresh" button to manually fetch the latest top 3 reviews.
 - Observe the automatic update of reviews every 30 seconds.
 - Explore the historical data of reviews, now persistently stored and visually distinguished by sentiment.
-
-## Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 
 ## Acknowledgements
